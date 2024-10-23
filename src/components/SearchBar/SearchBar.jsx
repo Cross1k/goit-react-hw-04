@@ -1,6 +1,6 @@
-import css from "./SearchForm.module.css";
+import css from "./SearchBar.module.css";
 
-function SearchForm({ onSearch }) {
+function SearchBar({ onSearch }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const form = evt.target;
@@ -25,4 +25,4 @@ function SearchForm({ onSearch }) {
   );
 }
 
-export default SearchForm;
+export default SearchBar;

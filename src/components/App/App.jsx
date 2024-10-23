@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { fetchPhotosTopic } from "../searchimage.js";
-import SearchForm from "../SearchForm/SearchForm.jsx";
-import ImageGalary from "../ImageGalary/ImageGalary.jsx";
+import SearchBar from "../SearchBar/SearchBar.jsx";
+import ImageGallery from "../ImageGallery/ImageGallery.jsx";
 import ImageModal from "../ImageModal/ImageModal.jsx";
-import LoadMore from "../LoadMore/LoadMore.jsx";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.jsx";
 
 import css from "./App.module.css";
 import Loader from "../Loader/Loader.jsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 
 const App = () => {
   const [query, setQuery] = useState(null);
@@ -37,9 +38,10 @@ const App = () => {
           });
         }, 200);
       } catch (error) {
+        setPhotos([]);
         setError(true);
-        console.log(error.message);
         setErrorMessage(error.message);
+        setTotalPages(null);
       } finally {
         setLoading(false);
       }
@@ -54,9 +56,7 @@ const App = () => {
   };
 
   const handleLoadMore = () => {
-    setLoading(true);
     setCurrentPage(currentPage + 1);
-    setLoading(false);
   };
 
   const fetchIsOpen = (data) => {
@@ -73,9 +73,9 @@ const App = () => {
 
   return (
     <div className={css.appDiv}>
-      <SearchForm onSearch={handleSearch} />
-      {error && alert(errorMessage)}
-      {photos != null && <ImageGalary item={photos} isOpen={fetchIsOpen} />}
+      <SearchBar onSearch={handleSearch} />
+      {error && <ErrorMessage msg={errorMessage} />}
+      {photos != null && <ImageGallery item={photos} isOpen={fetchIsOpen} />}
       {loading && <Loader />}
       {isOpen && (
         <ImageModal
@@ -84,7 +84,7 @@ const App = () => {
           isClosed={modalIsClosed}
         />
       )}
-      {currentPage < totalPages && <LoadMore onClick={handleLoadMore} />}
+      {currentPage < totalPages && <LoadMoreBtn onClick={handleLoadMore} />}
     </div>
   );
 };

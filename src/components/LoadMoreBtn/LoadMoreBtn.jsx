@@ -1,8 +1,7 @@
-import css from "./LoadMore.module.css";
+import css from "./LoadMoreBtn.module.css";
 
-function LoadMore({ onClick }) {
+function LoadMoreBtn({ onClick }) {
   const fetchMore = (evt) => {
-    // evt.preventDefault();
     onClick(evt);
   };
   return (
@@ -12,4 +11,4 @@ function LoadMore({ onClick }) {
   );
 }
 
-export default LoadMore;
+export default LoadMoreBtn;

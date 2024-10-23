@@ -1,8 +1,8 @@
-import css from "./ImageGalary.module.css";
+import css from "./ImageGallery.module.css";
 
 import ImageCard from "../ImageCard/ImageCard";
 
-function ImageGalary({ item, isOpen }) {
+function ImageGallery({ item, isOpen }) {
   return (
     <ul className={css.list}>
       {item.map((photo) => (
@@ -14,4 +14,4 @@ function ImageGalary({ item, isOpen }) {
   );
 }
 
-export default ImageGalary;
+export default ImageGallery;
